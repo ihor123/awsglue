@@ -7,7 +7,9 @@ from awsglue.job import Job
 from awsgluedq.transforms import EvaluateDataQuality
 import gs_now
 
-args = getResolvedOptions(sys.argv, ['JOB_NAME'])
+
+
+args = getResolvedOptions(sys.argv, ['JOB_NAME','BRONZE_S3BUCKET','silver_s3bucket','source_supplier'])
 sc = SparkContext()
 glueContext = GlueContext(sc)
 spark = glueContext.spark_session
@@ -21,7 +23,7 @@ DEFAULT_DATA_QUALITY_RULESET = """
     ]
 """
 
-bronze_s3bucket=args['bronze_s3bucket']
+bronze_s3bucket=args['BRONZE_S3BUCKET']
 silver_s3bucket=args['silver_s3bucket']
 source_supplier=args['source_supplier']
 

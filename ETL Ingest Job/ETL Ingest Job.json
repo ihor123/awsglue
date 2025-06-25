@@ -12,6 +12,7 @@
     "pythonVersion" : "3"
   },
   "defaultArguments" : {
+    "--BRONZE_S3BUCKET" : "s3://unicorndatasolutionssourcedata/dev/bronze/",
     "--enable-metrics" : "true",
     "--extra-py-files" : "s3://aws-glue-studio-transforms-312557305497-prod-eu-north-1/gs_common.py,s3://aws-glue-studio-transforms-312557305497-prod-eu-north-1/gs_now.py",
     "--spark-event-logs-path" : "s3://aws-glue-assets-632234552657-eu-north-1/sparkHistoryLogs/",
@@ -22,8 +23,7 @@
     "--silver_s3bucket" : "s3://unicorndatasolutionssourcedata/dev/silver/",
     "--job-bookmark-option" : "job-bookmark-disable",
     "--job-language" : "python",
-    "--TempDir" : "s3://aws-glue-assets-632234552657-eu-north-1/temporary/",
-    "--bronze_s3bucket" : "s3://unicorndatasolutionssourcedata/dev/bronze/"
+    "--TempDir" : "s3://aws-glue-assets-632234552657-eu-north-1/temporary/"
   },
   "maxRetries" : 0,
   "allocatedCapacity" : 2,
