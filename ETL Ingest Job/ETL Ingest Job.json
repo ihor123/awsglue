@@ -1,6 +1,6 @@
 {
   "name" : "ETL Ingest Job",
-  "jobMode" : "VISUAL",
+  "jobMode" : "SCRIPT",
   "description" : "",
   "role" : "arn:aws:iam::632234552657:role/GlueS3Role",
   "executionProperty" : {
@@ -13,24 +13,25 @@
   },
   "defaultArguments" : {
     "--enable-metrics" : "true",
-    "--enable-spark-ui" : "true",
     "--extra-py-files" : "s3://aws-glue-studio-transforms-312557305497-prod-eu-north-1/gs_common.py,s3://aws-glue-studio-transforms-312557305497-prod-eu-north-1/gs_now.py",
     "--spark-event-logs-path" : "s3://aws-glue-assets-632234552657-eu-north-1/sparkHistoryLogs/",
     "--enable-job-insights" : "true",
+    "--source_supplier" : "s3://unicorndatasolutionssourcedata/Source/",
     "--enable-observability-metrics" : "true",
     "--enable-glue-datacatalog" : "true",
+    "--silver_s3bucket" : "s3://unicorndatasolutionssourcedata/dev/silver/",
     "--job-bookmark-option" : "job-bookmark-disable",
     "--job-language" : "python",
-    "--TempDir" : "s3://aws-glue-assets-632234552657-eu-north-1/temporary/"
+    "--TempDir" : "s3://aws-glue-assets-632234552657-eu-north-1/temporary/",
+    "--bronze_s3bucket" : "s3://unicorndatasolutionssourcedata/dev/bronze/"
   },
   "maxRetries" : 0,
-  "allocatedCapacity" : 10,
-  "timeout" : 480,
-  "maxCapacity" : 10.0,
+  "allocatedCapacity" : 2,
+  "timeout" : 20,
+  "maxCapacity" : 2.0,
   "glueVersion" : "5.0",
-  "numberOfWorkers" : 10,
+  "numberOfWorkers" : 2,
   "workerType" : "G.1X",
-  "codeGenConfigurationNodes" : "{\"node-1750776576879\":{\"S3CsvSource\":{\"AdditionalOptions\":{\"EnableSamplePath\":false,\"SamplePath\":\"s3://unicorndatasolutionssourcedata/Source/pp-monthly-update-new-version.csv\"},\"Escaper\":\"\",\"Exclusions\":[],\"Name\":\"Amazon S3\",\"OptimizePerformance\":false,\"OutputSchemas\":[{\"Columns\":[]}],\"Paths\":[\"s3://unicorndatasolutionssourcedata/Source/\"],\"QuoteChar\":\"quote\",\"Recurse\":true,\"Separator\":\"comma\",\"WithHeader\":true}},\"node-1750847898093\":{\"DynamicTransform\":{\"FunctionName\":\"gs_now\",\"Inputs\":[\"node-1750776576879\"],\"Name\":\"Add Current Timestamp\",\"OutputSchemas\":[{\"Columns\":[{\"Name\":\"1\",\"Type\":\"string\"},{\"Name\":\"176000\",\"Type\":\"string\"},{\"Name\":\"{34222871-EE22-4D2B-E063-4704A8C07853}\",\"Type\":\"string\"},{\"Name\":\"2004-10-08 00:00\",\"Type\":\"string\"},{\"Name\":\"BS22 8ED\",\"Type\":\"string\"},{\"Name\":\"S\",\"Type\":\"string\"},{\"Name\":\"N\",\"Type\":\"string\"},{\"Name\":\"F\",\"Type\":\"string\"},{\"Name\":\"\",\"Type\":\"string\"},{\"Name\":\"SOMERDALE AVENUE\",\"Type\":\"string\"},{\"Name\":\"WESTON-SUPER-MARE\",\"Type\":\"string\"},{\"Name\":\"NORTH SOMERSET\",\"Type\":\"string\"},{\"Name\":\"A\",\"Type\":\"string\"},{\"Name\":\"TimeStampLoad\",\"Type\":\"timestamp\"}]}],\"Parameters\":[{\"IsOptional\":true,\"Name\":\"colName\",\"Type\":\"str\",\"Value\":[\"TimeStampLoad\"]}],\"Path\":\"s3://aws-glue-studio-transforms-312557305497-prod-eu-north-1/gs_now.py\",\"TransformName\":\"gs_now\",\"Version\":\"1.0.0\"}},\"node-1750778049146\":{\"S3GlueParquetTarget\":{\"AutoDataQuality\":{\"EvaluationContext\":\"EvaluateDataQuality_node1750776547134\",\"IsEnabled\":true},\"Compression\":\"snappy\",\"Inputs\":[\"node-1750847898093\"],\"Name\":\"Amazon S3\",\"NumberTargetPartitions\":\"0\",\"PartitionKeys\":[],\"Path\":\"s3://unicorndatasolutionssourcedata/dev/bronze/\",\"SchemaChangePolicy\":{\"EnableUpdateCatalog\":false}}}}",
   "sourceControlDetails" : {
     "provider" : "GITHUB",
     "repository" : "awsglue",
