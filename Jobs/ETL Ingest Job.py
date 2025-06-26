@@ -7,7 +7,7 @@ from awsglue.job import Job
 from awsgluedq.transforms import EvaluateDataQuality
 import gs_now
 
-
+##test3
 
 args = getResolvedOptions(sys.argv, ['JOB_NAME','BRONZE_S3BUCKET','silver_s3bucket','source_supplier'])
 sc = SparkContext()
